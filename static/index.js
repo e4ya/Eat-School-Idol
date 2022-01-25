@@ -5,10 +5,10 @@ document.write('<style type="text/css">' +
     (isDesktop ? '#welcome,#GameTimeLayer,#GameLayerBG,#GameScoreLayer.SHADE{position: absolute;}' :
         '#welcome,#GameTimeLayer,#GameLayerBG,#GameScoreLayer.SHADE{position:fixed;}@media screen and (orientation:landscape) {#landscape {display: box; display: -webkit-box; display: -moz-box; display: -ms-flexbox;}}') +
     '</style>');
-let map = {'d': 1, 'f': 2, 'j': 3, 'k': 4};
-if (isDesktop){
+let map = { 'd': 1, 'f': 2, 'j': 3, 'k': 4 };
+if (isDesktop) {
     document.write('<div id="gameBody">');
-    document.onkeydown = function (e) {
+    document.onkeydown = function(e) {
         let key = e.key.toLowerCase();
         if (Object.keys(map).indexOf(key) !== -1) {
             click(map[key])
@@ -24,7 +24,7 @@ function init() {
     showWelcomeLayer();
     body = document.getElementById('gameBody') || document.body;
     body.style.height = window.innerHeight + 'px';
-    transform = typeof (body.style.webkitTransform) != 'undefined' ? 'webkitTransform' : (typeof (body.style.msTransform) !=
+    transform = typeof(body.style.webkitTransform) != 'undefined' ? 'webkitTransform' : (typeof(body.style.msTransform) !=
         'undefined' ? 'msTransform' : 'transform');
     transitionDuration = transform.replace(/ransform/g, 'ransitionDuration');
     GameTimeLayer = document.getElementById('GameTimeLayer');
@@ -43,7 +43,7 @@ function init() {
     window.addEventListener('resize', refreshSize, false);
     let btn = document.getElementById('ready-btn');
     btn.className = 'btn btn-primary btn-lg';
-    btn.onclick = function () {
+    btn.onclick = function() {
         closeWelcomeLayer();
     }
 }
@@ -140,7 +140,7 @@ function gameStart() {
 function gameOver() {
     _gameOver = true;
     clearInterval(_gameTime);
-    setTimeout(function () {
+    setTimeout(function() {
         GameLayerBG.className = '';
         showGameScoreLayer();
     }, 1500);
@@ -218,9 +218,9 @@ function refreshGameLayer(box, loop, offset) {
         box.style.webkitTransitionDuration = '0ms';
         box.style.display = 'none';
         box.y = -blockSize * (Math.floor(box.children.length / 4) + (offset || 0)) * loop;
-        setTimeout(function () {
+        setTimeout(function() {
             box.style[transform] = 'translate3D(0,' + box.y + 'px,0)';
-            setTimeout(function () {
+            setTimeout(function() {
                 box.style.display = 'block';
             }, 100);
         }, 200);
@@ -255,7 +255,7 @@ function gameTapEvent(e) {
         return false;
     }
     if ((p.id == tar.id && tar.notEmpty) || (p.cell == 0 && x < blockSize) || (p.cell == 1 && x > blockSize && x < 2 *
-        blockSize) || (p.cell == 2 && x > 2 * blockSize && x < 3 * blockSize) || (p.cell == 3 && x > 3 * blockSize)) {
+            blockSize) || (p.cell == 2 && x > 2 * blockSize && x < 3 * blockSize) || (p.cell == 3 && x > 3 * blockSize)) {
         if (!_gameStart) {
             gameStart();
         }
@@ -383,29 +383,33 @@ document.write(createGameLayer());
 function initSetting() {
     document.getElementById("username").value = cookie("username") ? cookie("username") : "";
     document.getElementById("message").value = cookie("message") ? cookie("message") : "";
-    if(cookie("keyboard")){
+    if (cookie("keyboard")) {
         document.getElementById("keyboard").value = cookie("keyboard");
-        map={}
-        map[cookie("keyboard").charAt(0).toLowerCase()]=1;
-        map[cookie("keyboard").charAt(1).toLowerCase()]=2;
-        map[cookie("keyboard").charAt(2).toLowerCase()]=3;
-        map[cookie("keyboard").charAt(3).toLowerCase()]=4;
+        map = {}
+        map[cookie("keyboard").charAt(0).toLowerCase()] = 1;
+        map[cookie("keyboard").charAt(1).toLowerCase()] = 2;
+        map[cookie("keyboard").charAt(2).toLowerCase()] = 3;
+        map[cookie("keyboard").charAt(3).toLowerCase()] = 4;
     }
 }
+
 function show_btn() {
     document.getElementById("btn_group").style.display = "block"
     document.getElementById("setting").style.display = "none"
 }
+
 function show_setting() {
     document.getElementById("btn_group").style.display = "none"
     document.getElementById("setting").style.display = "block"
 }
+
 function save_cookie() {
     cookie('username', document.getElementById("username").value, 100);
     cookie('message', document.getElementById("message").value, 100);
     cookie('keyboard', document.getElementById("keyboard").value, 100);
     initSetting();
 }
+
 function isnull(val) {
     let str = val.replace(/(^\s*)|(\s*$)/g, '');
     if (str == '' || str == undefined || str == null) {
@@ -414,6 +418,7 @@ function isnull(val) {
         return false;
     }
 }
+
 function goRank() {
     let name = document.getElementById("username").value;
     let link = './rank.php';
